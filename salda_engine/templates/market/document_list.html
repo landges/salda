@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block title%}
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs">
+			<a href="{%url 'main'%}" title="На главную">На главную</a><span> &gt; </span><span>Документация</span>
+		</div>
+	</div><span style="font-family: &quot;Times New Roman&quot;;">Документация <br>
+ 	<br>
+	 Здесь Вы можете ознакомиться с документацией по посуде марки "Гурман".</span> <br>
+	 <br>
+	 {%for doc in document_list%}
+	 <a href="{{doc.file.url}}" target="_blank">{{doc.name}}</a> <br>
+	 {%endfor%}
+</div>
+{%endblock%}

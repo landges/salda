@@ -1,0 +1,148 @@
+{%extends 'base.html'%}
+{%block title%}
+Моя корзина
+{%endblock%}
+{%block content%}
+<div class="content ins">
+			<div class="breadcrumbs">
+				<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+						главную</a><span> &gt; </span><a href="{%url 'personal'%}" title="Мой кабинет">Мой
+						кабинет</a><span> &gt; </span><span>Моя корзина</span></div>
+			</div>
+			<script>
+				function ShowBasketItems(val) {
+					if (val == 2) {
+						if (document.getElementById("id-cart-list"))
+							document.getElementById("id-cart-list").style.display = 'none';
+						if (document.getElementById("id-shelve-list"))
+							document.getElementById("id-shelve-list").style.display = 'block';
+						if (document.getElementById("id-subscribe-list"))
+							document.getElementById("id-subscribe-list").style.display = 'none';
+						if (document.getElementById("id-na-list"))
+							document.getElementById("id-na-list").style.display = 'none';
+					}
+					else if (val == 3) {
+						if (document.getElementById("id-cart-list"))
+							document.getElementById("id-cart-list").style.display = 'none';
+						if (document.getElementById("id-shelve-list"))
+							document.getElementById("id-shelve-list").style.display = 'none';
+						if (document.getElementById("id-subscribe-list"))
+							document.getElementById("id-subscribe-list").style.display = 'block';
+						if (document.getElementById("id-na-list"))
+							document.getElementById("id-na-list").style.display = 'none';
+					}
+					else if (val == 4) {
+						if (document.getElementById("id-cart-list"))
+							document.getElementById("id-cart-list").style.display = 'none';
+						if (document.getElementById("id-shelve-list"))
+							document.getElementById("id-shelve-list").style.display = 'none';
+						if (document.getElementById("id-subscribe-list"))
+							document.getElementById("id-subscribe-list").style.display = 'none';
+						if (document.getElementById("id-na-list"))
+							document.getElementById("id-na-list").style.display = 'block';
+					}
+					else {
+						if (document.getElementById("id-cart-list"))
+							document.getElementById("id-cart-list").style.display = 'block';
+						if (document.getElementById("id-shelve-list"))
+							document.getElementById("id-shelve-list").style.display = 'none';
+						if (document.getElementById("id-subscribe-list"))
+							document.getElementById("id-subscribe-list").style.display = 'none';
+						if (document.getElementById("id-na-list"))
+							document.getElementById("id-na-list").style.display = 'none';
+					}
+				}
+			</script>
+			<form method="post" action="{%url 'card'%}" name="basket_form">
+				{%csrf_token%}
+				<div id="id-cart-list" style="display:block">
+					<div class="sort">
+						<div class="sorttext">Товары в корзине:</div>
+						<a href="javascript:void(0)" class="sortbutton current">готовые к заказу</a>
+					</div>
+					<table class="equipment mycurrentorders" rules="rows" style="width:726px">
+						<thead>
+							<tr>
+								<td>Название</td>
+								<td></td>
+								<td class="cart-item-discount">Скидка</td>
+								<td class="cart-item-quantity">Количество</td>
+								<td class="cart-item-price">Цена</td>
+								<td class="cart-item-delay"></td>
+							</tr>
+						</thead>
+						<tbody>
+							{%if products_in_basket%}
+								{%for product in products_in_basket%}
+									{%include 'market/includes/basket_card.html'%}
+								{%endfor%}
+
+							{%else%}
+							<td colspan="6" style="text-align:center">
+								<div class="cart-notetext">В вашей корзине ещё нет товаров.</div>
+								<a href="{%url 'main'%}" class="bt3">Начать покупки</a><br><br>
+							</td>
+							{%endif%}
+						</tbody>
+					</table>
+					<table class="myorders_itog" style="width: 100%;">
+						<tbody>
+							<tr>
+								<td rowspan="5" class="tal" style="width: 1000px;">
+									<input class="input_text_style"
+										onclick="if (this.value==&#39;введите код купона для скидки&#39;)this.value=&#39;&#39;; this.style.color=&#39;black&#39;"
+										onblur="if (this.value==&#39;&#39;) {this.value=&#39;введите код купона для скидки&#39;; this.style.color=&#39;#a9a9a9&#39;}"
+										style="color:#a9a9a9" value="введите код купона для скидки" name="COUPON">
+								</td>
+							</tr>
+							<tr>
+								<td>Итого:</td>
+								<td>{{total_amount}} руб.</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<table class="w100p" style="border-top:1px solid #d9d9d9;margin-bottom:40px;">
+						<tbody>
+							<tr>
+								<td style="padding:30px 2px;" class="tal">
+									<input type="submit" value="Пересчитать"
+										name="BasketRefresh" class="bt2"></td>
+								<td align="right" width="40%" style="padding:30px 2px;"></td>
+								<td style="padding:30px 2px;" class="tar">
+									<a href="{%url 'order'%}" id="basketOrderButton2" class="bt3 bt8">
+									Оформить заказ
+									</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="cart-items" id="id-shelve-list" style="display:none;">
+					<div class="sort">
+						<div class="sorttext">Товары в корзине:</div>
+						<a href="javascript:void(0)" onclick="ShowBasketItems(1);" class="sortbutton">готовые к заказу
+							(1)</a>
+						<a href="javascript:void(0)" class="sortbutton current">отложенные</a>
+					</div>
+				</div>
+
+				<div class="cart-items" id="id-subscribe-list" style="display:none;">
+					<div class="sort">
+						<div class="sorttext">Товары в корзине:</div>
+						<a href="javascript:void(0)" onclick="ShowBasketItems(1);" class="sortbutton">готовые к заказу
+							(1)</a>
+						<a href="javascript:void(0)" class="sortbutton current">ожидаемые</a>
+					</div>
+				</div>
+				<div class="cart-items" id="id-na-list" style="display:none;">
+					<div class="sort">
+						<div class="sorttext">Товары в корзине:</div>
+						<a href="javascript:void(0)" onclick="ShowBasketItems(1);" class="sortbutton">готовые к заказу
+							(1)</a>
+						<a href="javascript:void(0)" class="sortbutton current">отсутствуют</a>
+					</div>
+				</div>
+			</form>
+		</div>
+{%endblock%}

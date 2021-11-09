@@ -1,0 +1,166 @@
+{%extends 'base.html'%}
+{%block title%}
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+	</div>
+	<style>
+		.basket {
+			display: none;
+		}
+	</style>
+	<pre>
+	</pre>
+
+	<a name="order_form"></a>
+
+	<div id="order_form_div" class="order-checkout">
+		<noscript>
+			<div class="errortext">Для оформления заказа необходимо включить JavaScript. По-видимому, JavaScript
+				либо не поддерживается браузером, либо отключен. Измените настройки браузера и затем <a
+					href="">повторите попытку</a>.</div>
+		</noscript>
+
+
+		<div class="bx_order_make">
+			<b>Заказ сформирован</b><br><br>
+			<table class="sale_order_full_table">
+				<tbody>
+					<tr>
+						<td>
+							Ваш заказ <b>№{{order.id}}</b> от {{order.created}} успешно создан. <br><br>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<br><br>
+
+			<table class="sale_order_full_table">
+				<tbody>
+					<tr>
+						<td class="ps_logo">
+							<div class="pay_name">Оплата заказа</div>
+							<img src="{{order.payment.image.url}}"
+								border="0" alt="" width="95" height="62">
+							<div class="paysystem_name">{{order.payment}}</div><br>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<div style="display: none">
+
+
+
+		<div id="sls-21938" class="bx-slst">
+
+
+
+			<input type="hidden" name="LOCATION" value="" class="bx-ui-slst-target">
+
+			<div class="bx-ui-slst-pool">
+				<div class="dropdown-block bx-ui-slst-input-block">
+					<span class="dropdown-icon"></span>
+					<input type="text" name="" value="" autocomplete="off" class="dropdown-field"
+						style="display: none;">
+					<div class="bx-ui-combobox-container"
+						style="margin: 0px; padding: 0px; border: none; position: relative;">
+						<input type="text" value="" autocomplete="off" class="bx-ui-combobox-fake"
+							placeholder="Выберите местоположение ...">
+					</div>
+					<div class="dropdown-fade2white"></div>
+					<div class="bx-ui-combobox-loader" data-bx-ui-id="combobox-loader"></div>
+					<div class="bx-ui-combobox-toggle" title="Открыть / закрыть"
+						data-bx-ui-id="combobox-toggle"></div>
+
+					<div class="bx-ui-combobox-dropdown" data-bx-ui-id="combobox-dropdown">
+
+						<div data-bx-ui-id="pager-pane">
+							<div style="height: 100px;"></div>
+							<div></div>
+							<div style="height: 100px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-bx-ui-id="slst-error">
+			</div>
+
+
+
+			<div class="bx-ui-slst-loader"></div>
+		</div>
+
+		<script type="text/javascript">
+
+			if (!window.BX && top.BX)
+				window.BX = top.BX;
+
+
+
+			new BX.Sale.component.location.selector.steps({ 'scope': 'sls-21938', 'source': '/bitrix/components/bitrix/sale.location.selector.steps/get.php', 'query': { 'FILTER': { 'SITE_ID': '' }, 'BEHAVIOUR': { 'SEARCH_BY_PRIMARY': '0', 'LANGUAGE_ID': 'ru' } }, 'selectedItem': 0, 'knownBundles': { 'a': [] }, 'provideLinkBy': 'id', 'messages': { 'notSelected': 'Выберите местоположение ...', 'error': 'К сожалению, произошла внутренняя ошибка', 'nothingFound': 'Не удалось обнаружить местоположение', 'clearSelection': '--- Отменить выбор' }, 'callback': '', 'useSpawn': false, 'initializeByGlobalEvent': '', 'globalEventScope': '', 'rootNodeValue': 0, 'showDefault': false, 'bundlesIncomplete': { 'a': true, '0': true }, 'autoSelectWhenSingle': true, 'types': { '1': { 'CODE': 'COUNTRY' }, '4': { 'CODE': 'COUNTRY_DISTRICT' }, '2': { 'CODE': 'REGION' }, '5': { 'CODE': 'SUBREGION' }, '3': { 'CODE': 'CITY' }, '6': { 'CODE': 'VILLAGE' }, '7': { 'CODE': 'STREET' } }, 'disableKeyboardInput': false, 'dontShowNextChoice': false });
+
+
+		</script>
+
+
+
+
+
+		<div id="sls-93561" class="bx-sls ">
+
+
+			<div class="dropdown-block bx-ui-sls-input-block">
+
+				<span class="dropdown-icon"></span>
+				<input type="text" autocomplete="off" name="LOCATION" value="" class="dropdown-field"
+					placeholder="Введите название ..." style="display: none;">
+				<div class="bx-ui-sls-container"
+					style="margin: 0px; padding: 0px; border: none; position: relative;"><input type="text"
+						disabled="disabled" autocomplete="off" class="bx-ui-sls-route"
+						style="padding: 0px; margin: 0px;"><input type="text" autocomplete="off" value=""
+						class="bx-ui-sls-fake" placeholder="Введите название ..."></div>
+
+				<div class="dropdown-fade2white"></div>
+				<div class="bx-ui-sls-loader"></div>
+				<div class="bx-ui-sls-clear" title="Отменить выбор" style="display: none;"></div>
+				<div class="bx-ui-sls-pane" style="overflow: hidden auto;">
+					<div class="bx-ui-sls-variants"></div>
+				</div>
+
+			</div>
+
+
+
+
+
+			<div class="bx-ui-sls-error-message">
+			</div>
+
+		</div>
+
+		<script>
+
+			if (!window.BX && top.BX)
+				window.BX = top.BX;
+
+
+
+			new BX.Sale.component.location.selector.search({ 'scope': 'sls-93561', 'source': '/bitrix/components/bitrix/sale.location.selector.search/get.php', 'query': { 'FILTER': { 'EXCLUDE_ID': 0, 'SITE_ID': '' }, 'BEHAVIOUR': { 'SEARCH_BY_PRIMARY': '0', 'LANGUAGE_ID': 'ru' } }, 'selectedItem': false, 'knownItems': [], 'provideLinkBy': 'id', 'messages': { 'nothingFound': 'К сожалению, ничего не найдено', 'error': 'К сожалению, произошла внутренняя ошибка' }, 'callback': '', 'useSpawn': false, 'initializeByGlobalEvent': '', 'globalEventScope': '', 'pathNames': [], 'types': { '1': { 'CODE': 'COUNTRY' }, '4': { 'CODE': 'COUNTRY_DISTRICT' }, '2': { 'CODE': 'REGION' }, '5': { 'CODE': 'SUBREGION' }, '3': { 'CODE': 'CITY' }, '6': { 'CODE': 'VILLAGE' }, '7': { 'CODE': 'STREET' } } });
+
+
+		</script>
+
+	</div>
+
+</div>
+{%endblock%}

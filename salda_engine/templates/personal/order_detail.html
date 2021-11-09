@@ -1,0 +1,203 @@
+{%extends 'base.html'%}
+{%block title%}
+Заказ №{{order.id}}
+{%endblock%}
+{%block link%}
+<link rel="stylesheet" type="text/css" href="/static/css/style.min.css ">
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+				главную</a><span> &gt; </span><a href="{%url 'personal'%}" title="Мой кабинет">Мой
+				кабинет</a><span> &gt; </span><span>Мои заказы</span></div>
+	</div>
+
+
+	<div class="bx_my_order_switch">
+		<a class="bx_mo_link" href="{%url 'myorders'%}">В список заказов</a>
+	</div>
+
+	<div class="bx_order_list">
+
+		<table class="bx_order_list_table">
+			<thead>
+				<tr>
+					<td colspan="2">
+						Заказ №{{order.id}} от {{order.created}} </td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+
+					</td>
+					<td style="text-align: right">
+						Текущий статус: {{order.status}} (от {{order.updated}})
+					</td>
+				</tr>
+
+
+
+
+
+
+				<tr>
+					<td>Ф.И.О.(полностью):</td>
+					<td>
+
+						{{order.customer_name}}
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>E-Mail:</td>
+					<td>
+
+						{{order.customer_email}}
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>Контактный телефон:</td>
+					<td>
+
+						{{order.customer_phone}}
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>Населенный пункт:</td>
+					<td>
+
+						{{order.customer_address}}
+					</td>
+				</tr>
+
+
+				<tr>
+					<td>Я ознакомился с <a href="/delivery/" target="_blank">условиями
+							доставки</a> и подтверждаю свое согласие с этими условиями:</td>
+					<td>
+
+						Y
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td><br></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2">Параметры доставки и оплаты</td>
+				</tr>
+				<tr>
+					<td>Способ оплаты:</td>
+					<td>
+						{{order.payment}} ({{order.total_price}} руб.) </td>
+				</tr>
+				<tr>
+					<td>Статус оплаты:</td>
+					<td>
+						Нет </td>
+				</tr>
+				<tr>
+					<td>Способ доставки:</td>
+					<td>
+						{{order.delivery}}
+
+					</td>
+				</tr>
+				<tr>
+					<td><br></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Содержимое заказа</h3>
+		<table class="bx_order_list_table_order">
+			<thead>
+				<tr>
+					<td colspan="2">Наименование</td>
+					<td class="custom price">Цена</td>
+
+
+
+					<td class="custom price">Количество</td>
+				</tr>
+			</thead>
+			<tbody>
+				{%for product in order.p2o.all%}
+				<tr>
+					<td class="custom img">
+						<a href="{{product.product.get_absolute_url}}" target="_blank">
+
+
+							<img src="{{product.product.img.url}}" width="110"
+								height="109" alt="{{product.product.name}}">
+
+
+						</a>
+					</td>
+					<td class="custom name">
+						<a href="{{product.product.get_absolute_url}}" target="_blank">
+							{{product.product.name}}</a>
+					</td>
+
+					<td class="custom price"> <span class="fm">Цена:</span> {{product.price_per_item}} руб.</td>
+
+
+
+					<td class="custom price">
+						<span class="fm">Количество:</span> {{product.nmb}} шт
+					</td>
+				</tr>
+				{%endfor%}
+			</tbody>
+		</table>
+		<br>
+
+		<table class="bx_ordercart_order_sum">
+			<tbody>
+
+
+				<tr>
+					<td class="custom_t1">Товаров на:</td>
+					<td class="custom_t2">{{order.total_price}} руб.</td>
+				</tr>
+
+				<tr>
+					<td class="custom_t1">Стоимость доставки:</td>
+					<td class="custom_t2">350 руб.</td>
+				</tr>
+
+
+
+				<tr>
+					<td class="custom_t1 fwb">Итого:</td>
+					<td class="custom_t2 fwb">{{order.total_price}} руб.</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<table class="bx_control_table" style="width: 100%;">
+			<tbody>
+				<tr>
+					<td> <a href="{%url 'myorders'%}"
+							class="bx_big bx_bt_button_type_2 bx_cart">Вернуться назад</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
+{%endblock%}

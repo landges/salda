@@ -1,0 +1,30 @@
+<tr  class="basket-row">
+	<td>
+		<button class="deleteitem"
+			href="{{product.product.get_absolute_url}}"
+			title="Удалить товар из корзины" data-id="{{product.product.id}}" style="border: none;"></button>
+		<a href="{{product.product.get_absolute_url}}">
+			<img src="{{product.product.img.url}}" alt="{{product.product.name}}" height="100" width="100">
+		</a>
+	</td>
+	<td class="cart-item-name">
+		<a href="{{product.product.get_absolute_url}}">
+			{{product.product.name}} </a>
+	</td>
+	<td>0%</td>
+	<td>
+		<input maxlength="18" type="text" name="product-nmb" value="{{product.nmb}}" size="3"
+			id="QUANTITY_1225876">
+		<div class="count_nav">
+			<a href="javascript:void(0)" class="plus"
+				onclick="BX(&#39;QUANTITY_1225876&#39;).value++;"></a>
+			<a href="javascript:void(0)" class="minus"
+				onclick="if (BX(&#39;QUANTITY_1225876&#39;).value &gt; 1) BX(&#39;QUANTITY_1225876&#39;).value--;"></a>
+		</div>
+	</td>
+	<td class="cart-item-price">
+		<div class="price">{{product.product.price}} руб.</div>
+	</td>
+	<td>
+	</td>
+</tr>

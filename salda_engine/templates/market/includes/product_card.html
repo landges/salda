@@ -1,0 +1,51 @@
+<li class="itembg C3PO" data-id="{{product.name}}">
+	{%if product.is_new%}
+	<div style="margin-top:0px" class="badge NEWPRODUCT specialoffer" title="Новинки"></div>
+	{%endif%}
+	<table
+		style="width:100% !important;height:172px !important; display:block; overflow: hidden;">
+		<tr>
+			<td align="center" class="tac vam"
+				style="width: 282px !important;height:172px !important;"><a class="link"
+					href="{{product.get_absolute_url}}"><img class="item_img"
+						src="{{product.img.url}}"
+						width="114" height="" alt="" /></a></td>
+		</tr>
+	</table>
+
+	<hr />
+	<div style="width: 200px; padding: 0 17px 17px 17px;">
+		<h4>
+			<a href="{{product.get_absolute_url}}" class="item_title" title="{{product.name}}">
+				<span itemprop="name">
+					{{product.name}}
+					<span lass="white_shadow"></span>
+				</span>
+			</a>
+		</h4>
+		<div style="color: #a2a2a2;">
+			<div>Артикул: {{product.article}}</div>
+			<div>Цена: {{product.price}} руб. </div>
+		</div>
+	</div>
+	<div class="buy">
+		<form method="post" action="{{product.get_absolute_url}}" id="buy-form">
+			{%csrf_token%}
+			<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			</div>
+			<div class="buyLinks" id="buy-btn" data-id="{{product.id}}">
+				<button class="bt4 addtoCart buy-btn" rel="nofollow" id="catalog_add2cart_link_56"
+						title="{{product.name}}" style="display: block;
+														width: 64px;
+														height: 64px;
+														border: none;
+														background: url(/static/img/buy2.png) no-repeat;">
+						<span>
+							
+						</span>
+				</button>
+			</div>
+		</form>
+	</div>
+
+</li>

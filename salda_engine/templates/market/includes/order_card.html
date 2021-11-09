@@ -1,0 +1,40 @@
+<tr>
+	<td class="margin"></td>
+	<td class="itemphoto">
+		<div class="bx_ordercart_photo_container">
+			<a href="{{product.product.get_absolute_url}}">
+				<div class="bx_ordercart_photo"
+					style="background-image:url('{{product.product.img.url}}')">
+				</div>
+			</a>
+		</div>
+	</td>
+	<td class="item" style="width:70%">
+		<input type="hidden" name="product-id" value="{{product.product.id}}">
+		<h2 class="bx_ordercart_itemtitle">
+			<a href="{{product.product.get_absolute_url}}">
+				{{product.product.name}} </a>
+		</h2>
+
+		<div class="bx_ordercart_itemart">
+		</div>
+	</td>
+	<td class="custom right">
+		<span>Скидка:</span>
+		0%
+	</td>
+	<td class="price right">
+		<div class="current_price">{{product.product.price}} руб.</div>
+		<div class="old_price right">
+		</div>
+
+	</td>
+	<td class="custom right">
+		<span>Количество:</span>
+		{{product.nmb}}
+	</td>
+	<td class="custom right">
+		<span>Сумма:</span>
+		{{product.total_price}} руб.
+	</td>
+</tr>

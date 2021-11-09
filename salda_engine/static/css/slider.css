@@ -1,0 +1,30 @@
+
+	.item_img{
+		width: 190px;
+	}
+	.C3PO{
+		overflow: hidden;
+	}
+	.C3PO img{
+		cursor: pointer;
+	}
+	.bx-wrapper{
+		max-width: 1170px !important;
+		height: 280px;
+	}
+	.bx-wrapper li{
+		width: 1170px !important;
+	}
+	.bx-wrapper img{
+		margin: 0 auto;
+	}
+	.load_add{
+		background: #6F0400;
+		text-align: center;
+		color: #fff;
+		padding:10px;
+		cursor: pointer;
+	}
+	.shnBox li h4{
+		padding: 0;
+	}

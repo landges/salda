@@ -1,0 +1,122 @@
+{%extends 'base.html'%}
+{%block title%}
+Поиск по сайту
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+				главную</a><span> &gt; </span><span>Страница поиска</span></div>
+	</div>
+	<div class="search-page">
+		<form action="{%url 'search'%}" method="get">
+			{%csrf_token%}
+			<input type="text" name="q" value="{{q}}" size="40">
+			&nbsp;<select name="where">
+				<option value="">(везде)</option>
+			</select>
+			&nbsp;<input type="submit" value="Искать">
+			<input type="hidden" name="how" value="r">
+		</form><br>
+
+		
+		{%if is_paginated%}
+		<font class="text" style="display:none;">Результаты поиска
+
+
+			1 - 10 из 42<br></font>
+
+		<font class="text">
+			{%if prev_url%}
+			<a href="?{{prev_url}}&q={{q}}">
+			<img src="/static/img/pager_arrow_left.png" width="14" height="15" alt="Пред." title="Пред."></a>
+			{%endif%}
+			{%for n in search_query.paginator.page_range%}
+
+				{%if search_query.number == n %}
+				<b>{{n}}</b>
+				{% elif n > search_query.number|add:-3 and n < search_query.number|add:3 %}
+				<a href="?PAGEN_1={{n}}&q={{q}}">{{n}}</a>
+				{%endif%}
+
+			{%endfor%}
+
+			{%if next_url%}
+			<a href="?{{next_url}}&q={{q}}">
+			<img src="/static/img/pager_arrow_right.png" width="14" height="15" alt="След." title="След."></a>
+			{%endif%}
+			<!--&nbsp;
+<a href="/reviews/?MUL_MODE=&amp;PAGEN_1=5">Конец</a>-->
+
+
+
+			<noindex>
+				&nbsp;<a href="?SHOWALL_1=1" rel="nofollow">Все</a>
+			</noindex>
+
+		</font>
+		{%endif%}
+		<hr>
+		{%for s in search_query%}
+			<a href="{{s.get_absolute_url}}">{{s.name}}</a>
+			<p>{{s.dsc|safe}} </p>
+			<small>{{s.price}} руб.</small><br>
+			<hr>
+		{%endfor%}
+		
+
+		<font class="text" style="display:none;">Результаты поиска
+
+
+			1 - 50 из 68<br></font>
+
+		{%if is_paginated%}
+		<font class="text" style="display:none;">Отзывы
+
+
+			1 - 10 из 42<br></font>
+
+		<font class="text">
+			{%if prev_url%}
+			<a href="?{{prev_url}}&q={{q}}">
+			<img src="/static/img/pager_arrow_left.png" width="14" height="15" alt="Пред." title="Пред."></a>
+			{%endif%}
+			{%for n in search_query.paginator.page_range%}
+
+				{%if search_query.number == n %}
+				<b>{{n}}</b>
+				{% elif n > search_query.number|add:-3 and n < search_query.number|add:3 %}
+				<a href="?PAGEN_1={{n}}&q={{q}}">{{n}}</a>
+				{%endif%}
+
+			{%endfor%}
+
+			{%if next_url%}
+			<a href="?{{next_url}}&q={{q}}">
+			<img src="/static/img/pager_arrow_right.png" width="14" height="15" alt="След." title="След."></a>
+			{%endif%}
+			<!--&nbsp;
+<a href="/reviews/?MUL_MODE=&amp;PAGEN_1=5">Конец</a>-->
+
+
+
+			<noindex>
+				&nbsp;<a href="?SHOWALL_1=1" rel="nofollow">Все</a>
+			</noindex>
+
+		</font>
+		{%endif%}
+		 <br>
+		<p>
+			{%if order != 'price'%}
+			<a href="?PAGEN_1={{search_query.number}}&q={{q}}&order=price">Сортировать по цене</a>&nbsp;|&nbsp;<b>Отсортировано по
+				наличию</b>
+			{%else%}
+			<b>Отсортировано по цене</b>&nbsp;|&nbsp;<a
+				href="?PAGEN_1={{search_query.number}}&q={{q}}&order=in_storage">Сортировать по
+				наличию</a>
+			{%endif%}
+		</p>
+	</div>
+</div>
+{%endblock%}

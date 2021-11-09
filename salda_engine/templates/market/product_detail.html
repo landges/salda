@@ -1,0 +1,263 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}
+{{product.name}}
+{%endblock%}
+{%block link%}
+<link rel="stylesheet" type="text/css" href="{%static 'css/style_detail.css'%}">
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs">
+			<a href="{%url 'main'%}" title="На главную">На главную</a><span> > </span>
+			<a href="{{product.category.get_absolute_url}}" title="{{product.category.name}}">{{product.category.name}}</a><span> > </span>
+			<span>{{product.name}}</span>
+		</div>
+	</div>
+	<div class="bx_item_detail" id="bx_117848907_56" itemscope itemtype="http://schema.org/Product">
+
+		<div class="bx_item_container">
+			<div class="bx_lt">
+				<div class="bx_item_slider" id="bx_117848907_56_big_slider">
+					<div class="bx_bigimages">
+						<div class="item_price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							<meta itemprop="priceCurrency" content="RUB" />
+							<meta itemprop="price" content="{{product.price}}" />
+							<div class="item_old_price" id="bx_117848907_56_old_price" style="display: none">
+							</div>
+							<div class="item_current_price" id="bx_117848907_{{product.id}}_price">{{product.price}} руб.</div>
+							<div class="item_economy_price" id="bx_117848907_{{product.id}}_price_discount"
+								style="display: none"></div>
+						</div>
+						<div class="bx_bigimages_imgcontainer">
+							<span class="bx_bigimages_aligner"></span><img id="bx_117848907_{{product.id}}_pict"
+								src="{{product.img.url}}"
+								alt="{{product.name}}"
+								title="{{product.name}}" id="image_108" itemprop="image">
+							<div class="bx_stick_disc" id="bx_117848907_56_dsc_pict" style="display: none;">
+							</div>
+						</div>
+					</div>
+					<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus" data-counter
+						data-image="{{product.img.url}}"
+						data-description="{{product.dsc}}">
+					</div>
+				</div>
+			</div>
+
+			<div class="bx_rt">
+				<h1>
+					<span itemprop="name">{{product.name}}</span>
+				</h1>
+
+
+				<div class="bx_item_description" itemprop="description">
+					{{product.dsc|safe}}
+				</div>
+				<div class="artnumber">
+					<p><b>Артикул:</b><span> {{product.article}}</span></p>
+				</div>
+
+				<div class="artnumber">
+					{%if product.in_storage == True%}
+					Товар есть на складе
+					{%else%}
+					Товара нет на складе
+					{%endif%}
+
+				</div>
+
+
+				<div class="item_info_section">
+					<form method="post" action="{{product.get_absolute_url}}" id="buy-form">
+					{%csrf_token%}
+						<div class="item_buttons vam">
+							<span class="item_buttons_counter_block">
+								<span class="item_section_name_gray">Количество</span>
+								<a href="#" class="bx_bt_white bx_small bx_fwb" id="bx_117848907_56_quant_down" data-event="1">
+									<img src="{%static 'img/quan_left_bg.png'%}" width="6" height="6" alt="leftArrow" />
+								</a>
+								<input id="bx_quantity" type="text" class="tac transparent_input" value="1">
+								<a href="#" class="bx_bt_white bx_small bx_fwb" id="bx_117848907_56_quant_up" data-event="2">
+									<img src="{%static 'img/quan_right_bg.png'%}" width="6"
+										height="6" alt="rightArrow" />
+								</a>
+								<!--<span id="bx_117848907_56_quant_measure">шт</span>-->
+							</span>
+							<span class="item_buttons_counter_block bt9" id="buy-btn" data-id="{{product.id}}">
+								<span class="bx_big bx_bt_blue bx_cart" id="bx_117848907_56_buy_link">Добавить в
+									корзину</span>
+							</span>
+						</div>
+					</form>
+				</div>
+				<script type="text/javascript">
+					$(document).on('click','.bx_bt_white',function(event){
+						event.preventDefault();
+						var link=$(event.target).closest('.bx_bt_white');
+						var val = link.data("event");
+						input_val=parseInt($("#bx_quantity").val());
+						if (val == 2){
+							$("#bx_quantity").val(input_val+1);
+						}
+						else{
+							if(input_val>1){
+								$("#bx_quantity").val(input_val-1);
+							}
+						}
+					})
+					
+				</script>
+
+				<div class="item_info_section props">
+
+
+
+
+					{%if product.stats%}
+					<p class="propsHeader"><b>ХАРАКТЕРИСТИКИ ТОВАРА:</b></p>
+					<dl>
+						{%for key, value in product.stats.items%}
+
+						<dt><strong>{{key}}:</strong> {{value}}</dt>
+
+						{%endfor%}
+					</dl>
+					{%endif%}
+				</div>
+				<div class="clb"></div>
+			</div>
+
+			<div class="bx_md">
+				<div class="item_info_section">
+				</div>
+			</div>
+			<div class="bx_rb">
+				<div class="item_info_section">
+
+				</div>
+			</div>
+			<div class="bx_lb">
+				<div class="tac ovh">
+				</div>
+				<div class="tab-section-container">
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		<div class="clb"></div>
+	</div>
+	<script type="text/javascript">
+		var obbx_117848907_56 = new JCCatalogElement({ 'PRODUCT_TYPE': '1', 'SHOW_QUANTITY': true, 'SHOW_ADD_BASKET_BTN': true, 'SHOW_BUY_BTN': false, 'SHOW_DISCOUNT_PERCENT': true, 'SHOW_OLD_PRICE': true, 'DISPLAY_COMPARE': false, 'VISUAL': { 'BIG_SLIDER_ID': 'bx_117848907_56', 'ID': 'bx_117848907_56', 'PICT_ID': 'bx_117848907_56_pict', 'QUANTITY_ID': 'bx_117848907_56_quantity', 'QUANTITY_UP_ID': 'bx_117848907_56_quant_up', 'QUANTITY_DOWN_ID': 'bx_117848907_56_quant_down', 'PRICE_ID': 'bx_117848907_56_price', 'OLD_PRICE_ID': 'bx_117848907_56_old_price', 'DISCOUNT_VALUE_ID': 'bx_117848907_56_price_discount', 'DISCOUNT_PERC_ID': 'bx_117848907_56_dsc_pict', 'NAME_ID': '', 'TREE_ID': 'bx_117848907_56_skudiv', 'TREE_ITEM_ID': 'bx_117848907_56_prop_', 'SLIDER_CONT_OF_ID': 'bx_117848907_56_slider_cont_', 'SLIDER_LIST_OF_ID': 'bx_117848907_56_slider_list_', 'SLIDER_LEFT_OF_ID': 'bx_117848907_56_slider_left_', 'SLIDER_RIGHT_OF_ID': 'bx_117848907_56_slider_right_', 'BUY_ID': 'bx_117848907_56_buy_link', 'ADD_BASKET_ID': 'bx_117848907_56_add_basket_link', 'COMPARE_LINK_ID': 'bx_117848907_56_compare_link' }, 'PRODUCT': { 'ID': '56', 'PICT': { 'ID': '108', 'TIMESTAMP_X': '31.01.2014 13:02:23', 'MODULE_ID': 'iblock', 'HEIGHT': '387', 'WIDTH': '388', 'FILE_SIZE': '21338', 'CONTENT_TYPE': 'image/jpeg', 'SUBDIR': 'iblock/210', 'FILE_NAME': '210427baebe2b628f96ced73afd6ad6a.jpg', 'ORIGINAL_NAME': 'pot.jpg', 'DESCRIPTION': '', 'HANDLER_ID': '', 'EXTERNAL_ID': '', 'SRC': '/upload/iblock/210/210427baebe2b628f96ced73afd6ad6a.jpg', 'UNSAFE_SRC': '/upload/iblock/210/210427baebe2b628f96ced73afd6ad6a.jpg', 'ALT': 'Кастрюля Гурман &quot;Элит&quot; 2,0 л', 'TITLE': 'Кастрюля Гурман &quot;Элит&quot; 2,0 л' }, 'NAME': 'Кастрюля Гурман \"Элит\" 2,0 л', 'SUBSCRIPTION': true, 'PRICE': { 'VALUE_NOVAT': '2940', 'PRINT_VALUE_NOVAT': '2 940 руб.', 'VALUE_VAT': '2940', 'PRINT_VALUE_VAT': '2 940 руб.', 'VATRATE_VALUE': '0', 'PRINT_VATRATE_VALUE': '0 руб.', 'DISCOUNT_VALUE_NOVAT': '2940', 'PRINT_DISCOUNT_VALUE_NOVAT': '2 940 руб.', 'DISCOUNT_VALUE_VAT': '2940', 'PRINT_DISCOUNT_VALUE_VAT': '2 940 руб.', 'DISCOUNT_VATRATE_VALUE': '0', 'PRINT_DISCOUNT_VATRATE_VALUE': '0 руб.', 'CURRENCY': 'RUB', 'ROUND_VALUE_VAT': '2940', 'ROUND_VALUE_NOVAT': '2940', 'ROUND_VATRATE_VAT': '0', 'ROUND_VATRATE_NOVAT': '0', 'PRICE_ID': '1', 'ID': '48', 'CAN_ACCESS': 'Y', 'CAN_BUY': 'Y', 'MIN_PRICE': 'Y', 'VALUE': '2940', 'PRINT_VALUE': '2 940 руб.', 'UNROUND_DISCOUNT_VALUE': '2940', 'DISCOUNT_VALUE': '2940', 'PRINT_DISCOUNT_VALUE': '2 940 руб.', 'DISCOUNT_DIFF': '0', 'DISCOUNT_DIFF_PERCENT': '0', 'PRINT_DISCOUNT_DIFF': '0 руб.' }, 'CAN_BUY': true, 'CHECK_QUANTITY': false, 'QUANTITY_FLOAT': false, 'MAX_QUANTITY': '0', 'STEP_QUANTITY': '1', 'BUY_URL': '/catalog/kastryuli/kastryulya-2-0-l-elit/?SECTION_CODE=kastryuli&ELEMENT_CODE=kastryulya-2-0-l-elit&action=BUY&id=56' }, 'AJAX_PATH': '/catalog/kastryuli/kastryulya-2-0-l-elit/?SECTION_CODE=kastryuli&amp;ELEMENT_CODE=kastryulya-2-0-l-elit', 'MESS': [] });
+	</script>
+	<style>
+		.item_img {
+			width: 190px;
+		}
+
+		.C3PO {
+			overflow: hidden;
+		}
+
+		.C3PO img {
+			cursor: pointer;
+		}
+
+		.bx-wrapper {
+			max-width: 1170px !important;
+			height: 280px;
+		}
+
+		.bx-wrapper li {
+			width: 1170px !important;
+		}
+
+		.bx-wrapper img {
+			margin: 0 auto;
+		}
+
+		.load_add {
+			background: #6F0400;
+			text-align: center;
+			color: #fff;
+			padding: 10px;
+			cursor: pointer;
+		}
+
+		.shnBox li h4 {
+			padding: 0;
+		}
+	</style>
+	<h3 class="newsale"><span>Другие товары этой серии</span></h3>
+
+	<div class="shnBox">
+		<div class="listitem-carousel">
+			<ul class="lsnn" id="foo_recommend">
+				{%for product in link_products%}
+					{%include 'market/includes/product_card.html'%}
+				{%endfor%}
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			if ($('#ocb').length > 0) {
+				$('#ocb').prepend('<button id="show-ocb-form" class="intaro-modules-button basket"><i>Купить эту модель в 1 клик</i></button>');
+			}
+		});
+	</script>
+	<!-- <div class="ocb-form" id="ocb-form-wrap">
+		<div class="ocb-form-header">
+			<div class="ocb-form-header-caption">Купить эту модель в 1 клик</div>
+			<div class="ocb-form-header-close"></div>
+		</div>
+		<form method="post" id="ocb-form" action="/bitrix/components/intaro/one.click.buy/script.php">
+			<div id="ocb-params">
+				<input type="hidden" name="buyMode" value="ONE" />
+				<input type="hidden" name="itemId" value="56" />
+				<input type="hidden" name="dubLetter" value="s" />
+				<input type="hidden" name="paysystemId" value="0" />
+				<input type="hidden" name="deliveryId" value="0" />
+				<input type="hidden" name="personTypeId" value="" />
+				<input type="hidden" name="priceId" value="1" />
+				<input type="hidden" name="currencyCode" value="RUB" />
+				<input type="hidden" name="sessid" id="sessid" value="083aea407adc588e9589353015a665d4" />
+				<div class="ocb-form-field">
+					<label>Ваше имя <ins>*</ins> </label>
+					<input type="text" name="new_order[FIO]" value="" id="ocb-id-FIO" />
+					<div id="ocb-id-FIO-error" class="ocb-error-msg">Обязательно укажите ваше имя</div>
+				</div>
+				<div class="ocb-form-field">
+					<label>Контактный телефон <ins>*</ins> </label>
+					<input type="text" name="new_order[PHONE]" value="" id="ocb-id-PHONE" />
+					<div id="ocb-id-PHONE-error" class="ocb-error-msg">Обязательно укажите контактный телефон
+					</div>
+					<div id="ocb-id-PHONE-format-error" class="ocb-error-msg">В номере телефона допускаются
+						только цифры, скобки, пробелы, знак плюса и тире</div>
+				</div>
+				<div class="ocb-form-field">
+					<label>E-mail </label>
+					<input type="text" name="new_order[EMAIL]" value="" id="ocb-id-EMAIL" />
+					<div id="ocb-id-EMAIL-error" class="ocb-error-msg">Укажите правильный e-mail или оставьте
+						поле пустым</div>
+					<div id="ocb-id-EMAIL-format-error" class="ocb-error-msg">Укажите правильный e-mail или
+						оставьте поле пустым</div>
+				</div>
+				<div class="intaro-modules-button ptichka">
+					<input type="submit" value="Отправить заказ" id="ocb-form-button" name="ocb_form_button" />
+				</div>
+				<div class="ocb-form-loader"></div>
+			</div>
+		</form>
+		<div class="ocb-form-result" id="ocb-form-result">
+			<div class="ocb-result-icon-success">Спасибо за заказ!</div>
+			<div class="ocb-result-icon-fail">Ошибка!</div>
+			<div class="ocb-result-text">В ближайшее время наш менеджер свяжется с вами.</div>
+		</div>
+	</div> -->
+</div>
+<script type="text/javascript" src="{%static 'js/main.js'%}"></script>
+{%endblock%}

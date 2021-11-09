@@ -1,0 +1,102 @@
+{%extends 'base.html'%}
+{%block title%}
+Регистрация
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="https://salda.ru/" title="На главную">На
+				главную</a><span> &gt; </span><span>Вход на сайт</span></div>
+	</div>
+	<div class="bx-auth">
+
+		<noindex>
+			<form method="post" action="{%url 'signup'%}" name="bform">
+				{%csrf_token%}
+				<table class="data-table bx-registration-table">
+					<thead>
+						<tr>
+							<td colspan="2"><b>Регистрация</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Имя:</td>
+							<td><input type="text" name="first_name" maxlength="50" value=""
+									class="bx-auth-input"></td>
+						</tr>
+						<tr>
+							<td>Фамилия:</td>
+							<td><input type="text" name="last_name" maxlength="50" value=""
+									class="bx-auth-input"></td>
+						</tr>
+						<tr style="display:none;">
+							<td><span class="starrequired">*</span>Логин (мин. 3 символа):</td>
+							<td><input type="text" name="USER_LOGIN" maxlength="50" value=""
+									class="bx-auth-input"></td>
+						</tr>
+						<tr>
+							<td><span class="starrequired">*</span>E-Mail:</td>
+							<td><input type="text" name="username" maxlength="255" value=""
+									class="bx-auth-input"></td>
+						</tr>
+						<tr>
+							<td><span class="starrequired">*</span>Пароль:</td>
+							<td><input type="password" name="password1" maxlength="50" value=""
+									class="bx-auth-input" autocomplete="off">
+							</td>
+						</tr>
+						<tr>
+							<td><span class="starrequired">*</span>Подтверждение пароля:</td>
+							<td><input type="password" name="password2" maxlength="50" value=""
+									class="bx-auth-input" autocomplete="off"></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Пароль должен быть не менее 6 символов длиной.</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2"><b>Защита от автоматической регистрации</b></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="hidden" name="captcha_sid"
+									value="01c37368b9cf0ac671a3ec90dc99c657">
+								<img src="./Регистрация_files/captcha.php" width="180" height="40"
+									alt="CAPTCHA">
+							</td>
+						</tr>
+						<tr>
+							<td><span class="starrequired">*</span>Введите слово на картинке:</td>
+							<td><input type="text" name="captcha_word" maxlength="50" value=""></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td></td>
+							<td><input type="submit" name="Register" value="Регистрация"></td>
+						</tr>
+					</tfoot>
+				</table>
+
+				<p><span class="starrequired">*</span>Обязательные поля</p>
+
+				<p>
+					<a href="https://salda.ru/login/?login=yes" rel="nofollow"><b>Авторизация</b></a>
+				</p>
+
+			</form>
+		</noindex>
+		<script type="text/javascript">
+			document.bform.USER_NAME.focus();
+			$("input[name=USER_EMAIL]").change(function () {
+				$("input[name=USER_LOGIN]").val($(this).val());
+			})
+		</script>
+
+	</div>
+</div>
+{%endblock%}

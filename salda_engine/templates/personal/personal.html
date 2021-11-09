@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{%block title%}
+Персональный раздел
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+				главную</a><span> &gt; </span><span>Мой кабинет</span></div>
+	</div>
+	<div class="personal-page-nav">
+		<p>В личном кабинете Вы можете проверить текущее состояние корзины, ход выполнения Ваших заказов,
+			просмотреть или изменить личную информацию, а также подписаться на новости и другие информационные
+			рассылки. </p>
+		<div>
+			<h2>Личная информация</h2>
+			<ul class="lsnn">
+				<li><a href="https://salda.ru/personal/profile/">Изменить регистрационные данные</a></li>
+			</ul>
+		</div>
+		<div>
+			<h2>Заказы</h2>
+			<ul class="lsnn">
+				<li><a href="{%url 'myorders'%}">Ознакомиться с состоянием заказов</a></li>
+				<li><a href="{%url 'card'%}">Посмотреть содержимое корзины</a></li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+{%endblock%}

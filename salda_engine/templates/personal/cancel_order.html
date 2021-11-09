@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{%block title%}
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+				главную</a><span> &gt; </span><a href="{%url 'personal'%}" title="Мой кабинет">Мой
+				кабинет</a><span> &gt; </span><span>Мои заказы</span></div>
+	</div>
+	<a href="https://salda.ru/personal/order/">В список заказов</a>
+
+	<div class="bx_my_order_cancel">
+		<form method="post" action="{%url 'cancelorder' pk=order.id%}">
+			{%csrf_token%}
+			
+			Вы уверены, что хотите отменить
+			<a href="{{order.get_absolute_url}}">заказ #12672</a>?
+			<b>Отмена заказа необратима.</b><br><br>
+			Укажите, пожалуйста, причину отмены заказа:<br>
+
+			<textarea name="cancel"></textarea><br><br>
+			<input type="submit" name="action" value="Отменить заказ">
+
+		</form>
+
+	</div>
+</div>
+{%endblock%}

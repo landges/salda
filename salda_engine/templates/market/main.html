@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="content ins">
+			<div class="breadcrumbs">
+			</div>
+			<style>
+				.item_img {
+					width: 190px;
+				}
+
+				.C3PO {
+					overflow: hidden;
+				}
+
+				.C3PO img {
+					cursor: pointer;
+				}
+
+				.bx-wrapper {
+					max-width: 1170px !important;
+					height: 280px;
+				}
+
+				.bx-wrapper li {
+					width: 1170px !important;
+				}
+
+				.bx-wrapper img {
+					margin: 0 auto;
+				}
+
+				.load_add {
+					background: #6F0400;
+					text-align: center;
+					color: #fff;
+					padding: 10px;
+					cursor: pointer;
+				}
+
+				.shnBox li h4 {
+					padding: 0;
+				}
+			</style>
+			
+			<div class="shnBox">
+				<div class="listitem-carousel">
+					<ul class="lsnn" id="foo_recommend">
+						{%for product in products%}
+							{%include 'market/includes/product_card.html'%}
+						{%endfor%}
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="load_add">Загрузить еще</div>
+			{%csrf_token%}
+			<script type="text/javascript">
+				$(document).ready(function(){
+					var page =1;
+					$(document).on('click','.load_add',function(event){
+						console.log('d');
+						event.preventDefault();
+						page +=1;
+						var data = {};
+						var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+	 					data["csrfmiddlewaretoken"] = csrf_token;
+						data.page = page;
+
+						$.ajax({
+				 		url: '/main/',
+				 		type: 'POST',
+				 		data: data,
+				 		cache: true,
+				 		success: function (data) {
+				 			console.log('OK');
+				 			$('#foo_recommend').append(data);
+				 			},
+				 		error: function(){
+				 			console.log("error")
+				 		}
+				 		});
+					})
+					
+				})
+			</script>
+			<div class="mainPageBanner"> </div>
+			<h1>Интернет-магазин кухонной посуды</h1>
+		</div>
+{%endblock%}

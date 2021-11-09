@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+{%block title%}
+Мои заказы
+{%endblock%}
+{%block link%}
+<link rel="stylesheet" type="text/css" href="/static/css/style_myorders.css">
+{%endblock%}
+{%block content%}
+<div class="content ins">
+			<div class="breadcrumbs">
+				<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+						главную</a><span> &gt; </span><a href="{%url 'personal'%}" title="Мой кабинет">Мой
+						кабинет</a><span> &gt; </span><span>Мои заказы</span></div>
+			</div>
+
+
+
+
+			<div class="bx_my_order_status_desc">
+
+				<h2>Активные заказы</h2>
+
+			</div>
+
+
+			<div class="bx_my_order">
+				{%for order in orders%}
+				<table class="bx_my_order_table">
+					<thead>
+						<tr>
+							<td>
+								Заказ №{{order.id}} от {{order.created}} </td>
+							<td style="text-align: right;">
+								<a href="{{order.get_absolute_url}}">Подробнее о заказе</a>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<strong>Состав заказа:</strong>
+								<ul class="bx_item_list">
+
+									{%for product in order.p2o.all%}
+									<li>
+										<a href="{{product.product.get_absolute_url}}"
+											target="_blank">
+											{{product.product.name}} </a>
+										<nobr>&nbsp;— {{product.nmb}} шт</nobr>
+									</li>
+									{%endfor%}
+
+
+								</ul>
+								<strong>Сумма к оплате:</strong> {{order.total_price}} руб. <br>
+							</td>
+							<td>
+								<div class="bx_my_order_status green">{{order.status}}</div>
+
+								<div style="text-align: right; margin-top: -15px; margin-right: -10px;"><a
+										href="{%url 'cancelorder' pk=order.id%}"
+										style="min-width:140px"
+										class="bx_big bx_bt_button_type_2 bx_cart bx_order_action">Отменить заказ</a>
+								</div>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				{%endfor%}
+
+			</div>
+
+		</div>
+{%endblock%}

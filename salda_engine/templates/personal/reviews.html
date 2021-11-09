@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+{%block title%}
+{%endblock%}
+{%block link%}
+<link rel="stylesheet" type="text/css" href="/static/css/style_review.css">
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+				главную</a><span> &gt; </span><span>Отзывы</span></div>
+	</div>
+	<div class="bg_reviews_add">
+
+		<form action="{%url 'reviews'%}" method="post" enctype="multipart/form-data">
+			{%csrf_token%}
+			<select name="mark" id="rating">
+				<option disabled="" selected="">Оцените магазин</option>
+				<option value="1">ужасный магазин</option>
+				<option value="2">плохой магазин</option>
+				<option value="3">обычный магазин</option>
+				<option value="4">хороший магазин</option>
+				<option value="5">отличный магазин</option>
+			</select>
+			<br><br>
+			<label for="text_review">Отзыв</label><br>
+			<textarea id="text_review" name="text" cols="30" rows="5"></textarea>
+			<br>
+			<input name="add_review" type="submit" value="Оценить">
+		</form>
+	</div>
+	<div class="bg_reviews">
+		{%for review in reviews%}
+		<div class="bg_review" id="bx_1086519102_731">
+			<div class="bg_author">{{review.user.username}}</div>
+			<div class="bg_info">
+				<div class="bg_rating">
+					{%for x in review.mark%}
+					<span class="star_yellow"></span>
+					{%endfor%}
+					
+				</div>
+				<div class="bg_date">
+					{{review.created}} </div>
+			</div>
+			<div class="bg_text">
+				{{review.text}} </div>
+		</div>
+		{%endfor%}
+		
+		<br>
+		{%if is_paginated%}
+		<font class="text" style="display:none;">Отзывы
+
+
+			1 - 10 из 42<br></font>
+
+		<font class="text">
+			{%if prev_url%}
+			<a href="?{{prev_url}}">
+			<img src="/static/img/pager_arrow_left.png" width="14" height="15" alt="Пред." title="Пред."></a>
+			{%endif%}
+			{%for n in reviews.paginator.page_range%}
+
+				{%if reviews.number == n %}
+				<b>{{n}}</b>
+				{% elif n > reviews.number|add:-3 and n < reviews.number|add:3 %}
+				<a href="?PAGEN_1={{n}}">{{n}}</a>
+				{%endif%}
+
+			{%endfor%}
+
+			{%if next_url%}
+			<a href="?{{next_url}}">
+			<img src="/static/img/pager_arrow_right.png" width="14" height="15" alt="След." title="След."></a>
+			{%endif%}
+			<!--&nbsp;
+<a href="/reviews/?MUL_MODE=&amp;PAGEN_1=5">Конец</a>-->
+
+
+
+			<noindex>
+				&nbsp;<a href="?SHOWALL_1=1" rel="nofollow">Все</a>
+			</noindex>
+
+		</font>
+		{%endif%}
+	</div>
+</div>
+{%endblock%}

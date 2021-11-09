@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block title%}
+О производстве
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На главную</a><span> >
+			</span><span>О производстве</span></div>
+	</div>
+	{%for cat in categories%}
+	<div style="float:left;text-align:center;width:250px;height:270px;">
+		<a href="{{cat.get_absolute_url}}">
+			<img src="{{cat.image.url}}">
+			<br>{{cat.name}}
+		</a>
+	</div>
+	{%endfor%}
+</div>
+{%endblock%}

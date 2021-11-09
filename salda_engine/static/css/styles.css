@@ -1,0 +1,24 @@
+html,body,div,h1,h2,h3,h4,h5,h6,p,img,ul,li,table{margin:0;padding:0;border:0;outline:0 !important;font-size:100%;vertical-align:baseline;background:transparent}
+ol,ul{list-style:none}:focus{outline:none !important}
+table{border-collapse:collapse;border-spacing:0}
+body{font-family:"Tahoma";}
+a{color: #571010;cursor: pointer;text-decoration:none;}a:hover{text-decoration:underline;}
+a img{border:none}
+p{
+    font-size:13px;
+    color:#000;
+}
+#YMapsID{
+	width: 100% !important;
+}
+.show_cont{
+	margin-left: 25%;
+	cursor: pointer;
+	color:#820200;
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+.all_cont{
+	display: none;
+}

@@ -1,0 +1,126 @@
+{%extends 'base.html'%}
+{%block title%}
+{{category.name}}
+{%endblock%}
+{%block content%}
+<div class="content ins">
+			<div class="breadcrumbs">
+				<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На главную</a><span> > </span><a
+						href="/catalog/" title="Каталог">Каталог</a><span> > </span><span>{{category.name}}</span></div>
+			</div>
+			<h1>Кастрюли от производителя</h1>
+			<div class="sectDesc">
+				<div class="sectDescText"></div>
+			</div>
+
+			<style>
+				.item_img {
+					width: 190px;
+				}
+
+				.C3PO {
+					overflow: hidden;
+				}
+
+				.C3PO img {
+					cursor: pointer;
+				}
+
+				.bx-wrapper {
+					max-width: 1170px !important;
+					height: 280px;
+				}
+
+				.bx-wrapper li {
+					width: 1170px !important;
+				}
+
+				.bx-wrapper img {
+					margin: 0 auto;
+				}
+
+				.load_add {
+					background: #6F0400;
+					text-align: center;
+					color: #fff;
+					padding: 10px;
+					cursor: pointer;
+				}
+
+				.shnBox li h4 {
+					padding: 0;
+				}
+			</style>
+			<script type=text/javascript>
+		$(function(){
+			var ids = [];
+			$(document).on("click",".load_add",function(){
+				$(".itembg").each(
+					function(){
+						ids.push($(this).data("id"));
+					}
+				);
+				var ids_str = ids.join();
+				$.ajax({
+				  method: "POST",
+				  url: "/ajax/",
+				  data: { action: "getElCatMain", ids: ids_str }
+				})
+				  .done(function( msg ) {
+					if(msg)
+						$("#foo_recommend").append(msg);
+					else 
+						$(".load_add").remove();
+				  });
+			});	
+		})
+	</script>
+			<div class="shnBox">
+				<div class="listitem-carousel">
+					<ul class="lsnn" id="foo_recommend">
+						{%for product in products%}
+							{%include 'market/includes/product_card.html'%}
+						{%endfor%}
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			{%if is_paginated%}
+		<font class="text" style="display:none;">Отзывы
+
+
+			1 - 10 из 42<br></font>
+
+		<font class="text">
+			{%if prev_url%}
+			<a href="?{{prev_url}}">
+			<img src="/static/img/pager_arrow_left.png" width="14" height="15" alt="Пред." title="Пред."></a>
+			{%endif%}
+			{%for n in products.paginator.page_range%}
+
+				{%if products.number == n %}
+				<b>{{n}}</b>
+				{% elif n > products.number|add:-3 and n < products.number|add:3 %}
+				<a href="?PAGEN_1={{n}}">{{n}}</a>
+				{%endif%}
+
+			{%endfor%}
+
+			{%if next_url%}
+			<a href="?{{next_url}}">
+			<img src="/static/img/pager_arrow_right.png" width="14" height="15" alt="След." title="След."></a>
+			{%endif%}
+			<!--&nbsp;
+<a href="/reviews/?MUL_MODE=&amp;PAGEN_1=5">Конец</a>-->
+
+
+
+			<noindex>
+				&nbsp;<a href="https://salda.ru/reviews/?MUL_MODE=&amp;SHOWALL_1=1" rel="nofollow">Все</a>
+			</noindex>
+
+		</font>
+		{%endif%}
+		</div>
+{%endblock%}

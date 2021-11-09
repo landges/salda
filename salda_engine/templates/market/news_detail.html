@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%block title%}
+{{news.title}}
+{%endblock%}
+{%block link%}
+<link rel="stylesheet" type="text/css" href="/static/css/style_news.css">
+{%endblock%}
+{%block content%}
+	<div class="content ins">
+		<div class="breadcrumbs">
+			<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На главную</a><span> &gt; </span><a
+					href="/news/" title="Новости">Новости</a><span> &gt; </span><span>{{news.title}}</span></div>
+		</div>
+		<div class="news-detail">
+			<h3><span>{{news.title}}</span></h3>
+			<span class="news-date-time">{{news.publicate}}</span><br>
+			{{news.body|safe}}
+			<div style="clear:both"></div>
+			<br>
+		</div>
+		<p><a href="/news/">Возврат к списку</a></p>
+	</div>
+{%endblock%}

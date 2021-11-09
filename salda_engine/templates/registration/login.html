@@ -1,0 +1,115 @@
+{%extends 'base.html'%}
+{%block title%}
+Авторизация
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="https://salda.ru/" title="На главную">На
+				главную</a><span> &gt; </span><span>Вход на сайт</span></div>
+	</div>
+	<div class="bx-auth" style="max-width:100%">
+		<div class="bx-auth-title">Авторизация</div>
+		<center>
+			<form name="form_auth" method="post" target="_top" action="{%url 'login'%}">
+				{%csrf_token%}
+				
+				<table class="bx-auth-table" style="margin-left: -50px;">
+					<tbody>
+						<tr>
+							<td class="bx-auth-label">E-mail: </td>
+							<td><input class="" type="text" name="username" maxlength="255" value=""
+									style="width:150px"></td>
+						</tr>
+						<tr>
+							<td class="bx-auth-label">Пароль:</td>
+							<td><input class="" type="password" name="password" maxlength="255"
+									autocomplete="off" style="width:150px">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="checkbox" id="USER_REMEMBER" name="USER_REMEMBER" value="Y"><label
+									for="USER_REMEMBER">&nbsp;Запомнить меня</label></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="authorize-submit-cell"><input type="submit" name="Login" value="Войти"
+									style=""></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<noindex>
+					<p>
+						<a href="https://salda.ru/login/?forgot_password=yes" rel="nofollow">Забыли свой
+							пароль?</a>
+					</p>
+				</noindex>
+
+				<noindex>
+					<p>
+						<a href="{%url 'signup'%}" rel="nofollow">Зарегистрироваться</a><br>
+					</p>
+				</noindex>
+
+			</form>
+		</center>
+	</div>
+
+	<script type="text/javascript">
+		try { document.form_auth.USER_LOGIN.focus(); } catch (e) { }
+	</script>
+	<style>
+		.bx-auth {
+			max-width: 100% !important;
+		}
+	</style>
+
+	<div class="bx-auth">
+		<form method="post" name="bx_auth_services" target="_top" action="https://salda.ru/login/?login=yes">
+			<div class="bx-auth-title">Войти как пользователь</div>
+			<div class="bx-auth-note">Вы можете войти на сайт, если вы зарегистрированы на одном из этих
+				сервисов:</div>
+			<div class="bx-auth-services">
+				<div><a href="javascript:void(0)" onclick="BxShowAuthService(&#39;Bitrix24Net&#39;, &#39;&#39;)"
+						id="bx_auth_href_Bitrix24Net"><i class="bx-ss-icon bitrix24"></i><b>Битрикс24</b></a>
+				</div>
+				<div><a href="javascript:void(0)" onclick="BxShowAuthService(&#39;Facebook&#39;, &#39;&#39;)"
+						id="bx_auth_href_Facebook"><i class="bx-ss-icon facebook"></i><b>Facebook</b></a></div>
+				<div><a href="javascript:void(0)" onclick="BxShowAuthService(&#39;VKontakte&#39;, &#39;&#39;)"
+						id="bx_auth_href_VKontakte"><i class="bx-ss-icon vkontakte"></i><b>ВКонтакте</b></a>
+				</div>
+				<div><a href="javascript:void(0)"
+						onclick="BxShowAuthService(&#39;GooglePlusOAuth&#39;, &#39;&#39;)"
+						id="bx_auth_href_GooglePlusOAuth"><i
+							class="bx-ss-icon google-plus"></i><b>Google+</b></a></div>
+			</div>
+			<div class="bx-auth-line"></div>
+			<div class="bx-auth-service-form" id="bx_auth_serv" style="display:none">
+				<div id="bx_auth_serv_Bitrix24Net" style="display:none"><a href="javascript:void(0)"
+						onclick="BX.util.popup(&#39;https://www.bitrix24.net/oauth/authorize/?user_lang=ru&amp;client_id=ext.54c8c2cae173c9.06174969&amp;redirect_uri=https%3A%2F%2Fsalda.ru%2Flogin%2F%3Fauth_service_id%3DBitrix24Net&amp;scope=auth&amp;response_type=code&amp;mode=popup&amp;state=site_id%3Ds1%26backurl%3D%252Flogin%252F%253Fcheck_key%253D9a53fdcc332459693c4c1769d70e97cf%26mode%3Dpopup&#39;, 800, 600)"
+						class="bx-ss-button bitrix24net-button bitrix24net-button-ru"></a><span
+						class="bx-spacer"></span><span>Используйте вашу учетную запись на Битрикс24 для входа на
+						сайт.</span></div>
+				<div id="bx_auth_serv_Facebook" style="display:none"><a href="javascript:void(0)"
+						onclick="BX.util.popup(&#39;https://www.facebook.com/dialog/oauth?client_id=1382258415183879&amp;redirect_uri=https%3A%2F%2Fsalda.ru%2Flogin%2F%3Fauth_service_id%3DFacebook%26check_key%3D9a53fdcc332459693c4c1769d70e97cf%26backurl%3D%252Flogin%252F&amp;scope=email,publish_actions,user_friends&amp;display=popup&#39;, 580, 400)"
+						class="bx-ss-button facebook-button"></a><span
+						class="bx-spacer"></span><span>Используйте вашу учетную запись на Facebook.com для входа
+						на сайт.</span></div>
+				<div id="bx_auth_serv_VKontakte" style="display:none"><a href="javascript:void(0)"
+						onclick="BX.util.popup(&#39;https://oauth.vk.com/authorize?client_id=5187714&amp;redirect_uri=https%3A%2F%2Fsalda.ru%2Flogin%2F%3Fauth_service_id%3DVKontakte&amp;scope=friends,offline,email&amp;response_type=code&amp;state=site_id%3Ds1%26backurl%3D%252Flogin%252F%253Fcheck_key%253D9a53fdcc332459693c4c1769d70e97cf%26redirect_url%3D%252Flogin%252F&#39;, 660, 425)"
+						class="bx-ss-button vkontakte-button"></a><span
+						class="bx-spacer"></span><span>Используйте вашу учетную запись VKontakte для входа на
+						сайт.</span></div>
+				<div id="bx_auth_serv_GooglePlusOAuth" style="display:none"><a href="javascript:void(0)"
+						onclick="BX.util.popup(&#39;https://accounts.google.com/o/oauth2/auth?client_id=&amp;redirect_uri=https%3A%2F%2Fsalda.ru%2Fbitrix%2Ftools%2Foauth%2Fgoogle.php&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me&amp;response_type=code&amp;access_type=offline&amp;state=provider%3DGooglePlusOAuth%26site_id%3Ds1%26backurl%3D%252Flogin%252F%253Fcheck_key%253D9a53fdcc332459693c4c1769d70e97cf%26mode%3Dopener%26redirect_url%3D%252Flogin%252F&#39;, 580, 400)"
+						class="bx-ss-button google-button"></a><span class="bx-spacer"></span><span>Используйте
+						вашу учетную запись Google для входа на сайт.</span></div>
+			</div>
+			<input type="hidden" name="auth_service_id" value="">
+		</form>
+	</div>
+
+</div>
+{%endblock%}

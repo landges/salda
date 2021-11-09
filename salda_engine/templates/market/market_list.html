@@ -1,0 +1,172 @@
+{%extends 'base.html'%}
+{%block title%}
+Контакты
+{%endblock%}
+{%block link%}
+<script src="https://api-maps.yandex.ru/2.1/?apikey=f201800e-62b9-4386-b053-5db3a2a45712&lang=ru_RU" type="text/javascript">
+</script>
+{%endblock%}
+{%block content%}
+<div class="content ins">
+			<div class="breadcrumbs">
+				<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На
+						главную</a><span> &gt; </span><span>Контакты</span></div>
+			</div>
+			<p align="justify" style="text-align: center;">
+				Мы с гордостью представляем посуду Гурман изготовленную на Урале в городе Верхняя Салда Свердловской
+				области. Высококачественная нержавеющая сталь, классический европейский дизайн, знания и труд уральских
+				инженеров и рабочих делают посуду Гурман подарком не только для тех, кто готовит вкусные и здоровые
+				блюда для себя и своей семьи, но и ищет максимальных возможностей для реализации своих кулинарных
+				фантазий.
+			</p>
+			<p align="justify">
+			</p>
+			<p align="justify" style="text-align: center;">
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i> &nbsp; &nbsp; Коллектив интернет-магазина Salda.ru.&nbsp;</i><br>
+			</p>
+			<br>
+			<p>
+				<b>График обработки заказов интернет-магазина:</b>
+			</p>
+			<br>
+			<p>
+				Вторник-Пт: 09.00-18.00
+			</p>
+			<p>
+				Сб, Вс: выходные
+			</p>
+			<br>
+			<p>
+				<b>График работы фирменного салона на ул. Онежская:</b>
+			</p>
+			<br>
+			<p>
+				Вторник-Пятница: 10.00-20.00
+			</p>
+			<p>
+				Суббота: 10.00-18.00
+			</p>
+			<p>
+				Воскресенье, понедельник: выходной
+			</p>
+			<br>
+			<p>
+				Контактный телефон фирменного салона:+7 (495) 727-21-50
+			</p>
+			<br>
+			<div id="map" style="display: block; width: 100%; height: 400px;"></div>
+
+			<script type="text/javascript">
+			    // Функция ymaps.ready() будет вызвана, когда
+			    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+			    ymaps.ready(init);
+			    function init(){
+			        // Создание карты.
+			        var myMap = new ymaps.Map("map", {
+			            // Координаты центра карты.
+			            // Порядок по умолчанию: «широта, долгота».
+			            // Чтобы не определять координаты центра карты вручную,
+			            // воспользуйтесь инструментом Определение координат.
+			            center: [55.76, 37.64],
+			            // Уровень масштабирования. Допустимые значения:
+			            // от 0 (весь мир) до 19.
+			            zoom: 7
+			        });
+			               // Создаём макет содержимого.
+			        MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+			            '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+			        ),
+			        {%for marker in market_list%}
+			        myPlacemark_{{marker.id}} = new ymaps.Placemark([{{marker.point}}], {
+			            hintContent: 'Собственный значок метки',
+			            balloonContent: '{{marker.address}}'
+			        }),
+			        {%endfor%}
+
+			        
+			    {%for marker in market_list%}
+			    myMap.geoObjects.add(myPlacemark_{{marker.id}});
+			    {%endfor%}
+			        
+			    }
+			</script>
+			<div itemscope="" itemtype="http://schema.org/Organization">
+				<p>
+					<b><span style="font-size: 16px;" itemprop="name">ЗАО "Конмет РС"</span></b>
+				</p>
+				<p>
+				</p>
+				<div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+					<b><span style="font-size: 16px;">Фактический адрес: <span itemprop="postalCode">125413</span>, г.
+							<span itemprop="addressLocality">Москва</span>, <span itemprop="streetAddress">Онежская ул,
+								дом 24/1</span></span></b>
+				</div>
+				<p>
+				</p>
+				<p>
+					<b><span style="font-size: 16px;">ОГРН 1027739705619</span></b>
+				</p>
+				<p>
+					<b><span style="font-size: 16px;">ИНН 7703171563</span></b>
+				</p>
+				<p>
+					<b><span style="font-size: 16px;">Юридический адрес: 125413, г. Москва, Онежская ул, дом
+							24/1</span></b>
+				</p>
+				<p>
+					<b><span style="font-size: 16px;">Телефон: <span itemprop="telephone">+7 (495)
+								727-21-51</span></span></b>
+				</p>
+				<p>
+					<b><span style="font-size: 16px;">Электронная почта: <a
+								href="mailto:zakaz@salda.ru">zakaz@salda.ru</a></span></b>
+				</p>
+				<p>
+					<b><span style="font-size: 16px;">Сотрудничество, оптовые продажи: <a
+								href="mailto:gurman_posuda@mail.ru"><span
+									itemprop="email">gurman_posuda@mail.ru</span></a> <br>
+						</span></b>
+				</p>
+			</div>
+			<p>
+				<b><span style="font-size: 16px;">Производство: <a href="mailto:posuda@vsmpo.ru">posuda@vsmpo.ru</a>
+						<br>
+						Техническая поддержка: <a href="mailto:support@salda.ru">support@salda.ru</a></span></b>
+			</p>
+			<p align="justify">
+				<br>
+			</p>
+			<h2 style="text-align: center;">Адреса магазинов:</h2>
+			<br>
+			<p>
+				<br>
+			</p>
+			
+			<p>
+				{%with market_list|first as market%}
+				{{market.address}}
+				{%endwith%}
+			</p>
+			<p>
+				Авторизованный дилер Санкт-Петербург, наб. Канала Грибоедова, 42 Контактный телефон:+7 (812)
+				310-53-86<br>
+				<br>
+				<span class="show_cont">показать всё</span>
+			</p>
+			<div class="all_cont" style="display: block;">
+				<p>
+					{%for market in market_list%}
+						{{market.address}}<br>
+					{%endfor%}
+					
+				</p>
+			</div>
+			<script type="text/javascript">
+				$('.show_cont').on('click touch', function () {
+					$('.all_cont').toggle();
+				});
+			</script>
+		</div>
+{%endblock%}

@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block title%}
+{%endblock%}
+{%block content%}
+<div class="content ins">
+	<div class="breadcrumbs">
+		<div id="breadcrumb" class="breadcrumbs"><a href="{%url 'main'%}" title="На главную">На главную</a><span> &gt; </span><span>Новости</span>
+		</div>		
+	</div>
+
+	<div class="news-list">
+		{%for news in news_list%}
+		<p class="news-item" id="bx_{{news.id}}">
+			<a href="{{news.get_absolute_url}}">{{news.title}}</a>
+			<span class="news-date-time">{{news.publicate}}</span>
+		</p>
+		{%endfor%}
+	</div>
+</div>
+{%endblock%}
